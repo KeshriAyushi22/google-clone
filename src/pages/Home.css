@@ -33,5 +33,14 @@
 }
 
 .home__body{
-    flex-grow: 1;
+    flex: 1; /* all the rest of the area is taken by this*/
+    margin-top: 10%;
+    display:flex;
+    flex-direction: column;
+}
+
+.home__body > img {
+    object-fit:contain; /* doesnt strtch the object*/
+    height: 100px;
+    
 }
