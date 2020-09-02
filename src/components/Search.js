@@ -1,9 +1,16 @@
 import React from 'react'
+import { Mic } from '@material-ui/icons';
+import SearchIcon from '@material-ui/icons/Search';
+import "./Search.css"
 
 export default function Search() {
     return (
-        <div>
-
+        <div className="search__box">
+            <div className="search__input">
+                <SearchIcon className="search__inputIcon" />
+                <input type="text" />
+                <Mic />
+            </div>
         </div>
     )
 }
