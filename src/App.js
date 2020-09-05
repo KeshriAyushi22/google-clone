@@ -21,7 +21,7 @@ function App() {
 
           {/* Search Page (the search result page) */}
           <Route exact path="/search">
-           <SearchPage />
+            <SearchPage />
           </Route>
 
         </Switch>
