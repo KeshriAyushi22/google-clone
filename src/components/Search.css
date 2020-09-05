@@ -16,10 +16,6 @@
   max-width: 560px;
 }
 
-/* .search__box:hover {
-  box-shadow: 2px 5px 10px 1px rgb(223, 220, 220);
-} */
-
 .search__input > input {
   border: none;
   width: 120px;
