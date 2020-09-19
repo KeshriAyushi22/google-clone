@@ -55,5 +55,10 @@
 }
 
 .search__buttonHide {
-  display: none;
+  display: none !important;
+}
+
+.search__mic :hover {
+  cursor: pointer;
+  color: #6a6ace;
 }

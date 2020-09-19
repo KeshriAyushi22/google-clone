@@ -20,12 +20,24 @@ export default function Search({ hideButton = false }) { //default value
         setInput(e.target.value);
     }
 
+    const SpeechRecognition = window.webkitSpeechRecognition || window.SpeechRecognition;
+    const speech = new SpeechRecognition();
+    speech.onstart = function () {
+        console.log("data")
+    }
+
+
+    const micClicked = () => {
+
+        speech.start()
+    }
+
     return (
         <form className="search__box" onSubmit={search}>
             <div className="search__input">
                 <SearchIcon className="search__inputIcon" />
                 <input type="text" onChange={changeHandler} value={input} />
-                <Mic />
+                <Mic className="search__mic" onClick={micClicked} />
             </div>
 
             {!hideButton ? (
