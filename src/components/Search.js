@@ -4,6 +4,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import "./Search.css"
 import { Button } from '@material-ui/core'
 import { useHistory } from 'react-router-dom'
+import { recognition } from "../services/speechUtil"
 
 export default function Search({ hideButton = false }) { //default value
 
@@ -20,16 +21,14 @@ export default function Search({ hideButton = false }) { //default value
         setInput(e.target.value);
     }
 
-    const SpeechRecognition = window.webkitSpeechRecognition || window.SpeechRecognition;
-    const speech = new SpeechRecognition();
-    speech.onstart = function () {
-        console.log("data")
-    }
 
+    const micClicked = async () => {
+        //taking the object and starting it
+        const isInitiated = await recognition.start()
 
-    const micClicked = () => {
+        if (isInitiated)
+            document.querySelector('input').innerHTML = recognition.onresult()
 
-        speech.start()
     }
 
     return (
