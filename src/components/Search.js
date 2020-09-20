@@ -4,16 +4,31 @@ import SearchIcon from '@material-ui/icons/Search';
 import "./Search.css"
 import { Button } from '@material-ui/core'
 import { useHistory } from 'react-router-dom'
-import { recognition } from "../services/speechUtil"
+
 
 export default function Search({ hideButton = false }) { //default value
+
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition
+    const recognition = new SpeechRecognition();
+    recognition.onstart = () => {
+        console.log("starting to listen the voice")
+    }
+
+    recognition.onresult = (e) => {
+        const index = e.resultIndex
+        const data = e.results[index][0].transcript
+        console.log(data, document)
+
+        //show on browser search bar and set the same data for search
+        document.getElementById('searchbar').innerHTML = data
+        setInput(data)
+    }
 
     const [input, setInput] = useState("");
     const history = useHistory();
 
     const search = e => {
         e.preventDefault();
-        console.log("hi" + input);
         history.push("/search");
     }
 
@@ -24,10 +39,7 @@ export default function Search({ hideButton = false }) { //default value
 
     const micClicked = async () => {
         //taking the object and starting it
-        const isInitiated = await recognition.start()
-
-        if (isInitiated)
-            document.querySelector('input').innerHTML = recognition.onresult()
+        recognition.start()
 
     }
 
@@ -35,7 +47,7 @@ export default function Search({ hideButton = false }) { //default value
         <form className="search__box" onSubmit={search}>
             <div className="search__input">
                 <SearchIcon className="search__inputIcon" />
-                <input type="text" onChange={changeHandler} value={input} />
+                <input id="searchbar" type="text" onChange={changeHandler} value={input} />
                 <Mic className="search__mic" onClick={micClicked} />
             </div>
 
