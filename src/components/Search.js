@@ -4,10 +4,13 @@ import SearchIcon from '@material-ui/icons/Search';
 import "./Search.css"
 import { Button } from '@material-ui/core'
 import { useHistory } from 'react-router-dom'
+import { useContextValue } from '../services/context';
+import { actionTypes } from '../services/reducer';
 
 
 export default function Search({ hideButton = false }) { //default value
     const [input, setInput] = useState("");
+    const [{ }, dispatch] = useContextValue()
     const history = useHistory();
 
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition
@@ -27,8 +30,13 @@ export default function Search({ hideButton = false }) { //default value
 
     }
 
-    const search = e => {
+
+   const search = e => {
         e.preventDefault();
+        dispatch({
+            type: actionTypes.SET_SEARCH_TERM,
+            term: input
+        })
         history.push("/search");
     }
 
@@ -54,14 +62,14 @@ export default function Search({ hideButton = false }) { //default value
                 <div className="search__button">
                     <Button variant="outlined" type="submit" onClick={search}>
                         Google Search
-            </Button>
+                    </Button>
                     <Button variant="outlined">I'm Feeling Lucky</Button>
                 </div>
             ) : (
                     <div className="search__buttonHide">
                         <Button variant="outlined" type="submit" onClick={search}>
                             Google Search
-            </Button>
+                        </Button>
                         <Button variant="outlined">I'm Feeling Lucky</Button>
                     </div>
                 )}

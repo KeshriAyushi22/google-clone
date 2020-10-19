@@ -1,8 +1,12 @@
 
 export const initialState = {
-    user: ''
+    user: '',
+    searchTerm:''
 }
 
+export const actionTypes = {
+    SET_SEARCH_TERM: 'SET_SEARCH_TERM'
+}
 
 const reducer = (state, action) => {
 
@@ -11,6 +15,12 @@ const reducer = (state, action) => {
             return {
                 ...state,
                 user: action.user
+            }
+
+        case actionTypes.SET_SEARCH_TERM:
+            return {
+                ...state,
+                search: action.searchTerm
             }
 
         default:
