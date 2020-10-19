@@ -7,6 +7,8 @@ import { useHistory } from 'react-router-dom'
 
 
 export default function Search({ hideButton = false }) { //default value
+    const [input, setInput] = useState("");
+    const history = useHistory();
 
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition
     const recognition = new SpeechRecognition();
@@ -22,10 +24,8 @@ export default function Search({ hideButton = false }) { //default value
         //show on browser search bar and set the same data for search
         document.getElementById('searchbar').innerHTML = data
         setInput(data)
-    }
 
-    const [input, setInput] = useState("");
-    const history = useHistory();
+    }
 
     const search = e => {
         e.preventDefault();
@@ -35,7 +35,6 @@ export default function Search({ hideButton = false }) { //default value
     const changeHandler = e => {
         setInput(e.target.value);
     }
-
 
     const micClicked = async () => {
         //taking the object and starting it

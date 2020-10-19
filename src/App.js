@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./App.css";
 import {
   BrowserRouter as Router,
@@ -7,8 +7,35 @@ import {
 } from "react-router-dom";
 import Home from "./pages/Home";
 import SearchPage from "./pages/SearchPage"
+import { useContextValue } from "./services/context";
+import { auth } from "./firebase";
 
 function App() {
+
+  const [{ }, dispatch] = useContextValue()
+
+  /**Check if user was logged in or not, if yes log them again */
+  useEffect(() => {
+    console.log("here")
+    auth.onAuthStateChanged((authUser) => {
+      console.log(authUser)
+      if (authUser)
+        dispatch({
+          type: 'SET_USER',
+          user: authUser
+        })
+      else {
+        dispatch({
+          type: 'SET_USER',
+          user: ''
+        })
+      }
+    })
+
+  }, [])
+
+
+
   return (
     <div className="app">
       <Router>

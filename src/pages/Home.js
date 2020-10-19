@@ -4,8 +4,20 @@ import { Apps } from "@material-ui/icons";
 import { Avatar } from "@material-ui/core";
 import "./Home.css";
 import Search from "../components/Search"
+import { useContextValue } from "../services/context";
+import { auth } from "../firebase"
 
 export default function Home() {
+
+    const [{ user }, dispatch] = useContextValue()
+    const loginToGmail = () => {
+        //providing the authentication of google
+        // const base_provider = auth.GoogleAuthProvider();
+
+        // //passing this obj as the parameter
+        // auth.signInWithPopup(base_provider).then(result => console.log(result)).catch(err => console.log(err))
+    }
+
     return (
         <div className="home">
             <div className="home__header">
@@ -14,7 +26,7 @@ export default function Home() {
                     <Link to="/store">Store</Link>
                 </div>
                 <div className="home_headerRight">
-                    <Link to="/gmail">Gmail</Link>
+                    <Link to="/" onClick={loginToGmail}>Gmail</Link>
                     <Link to="/images">Images</Link>
                     <Apps />
                     <Avatar />
