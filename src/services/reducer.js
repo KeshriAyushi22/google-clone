@@ -20,7 +20,7 @@ const reducer = (state, action) => {
         case actionTypes.SET_SEARCH_TERM:
             return {
                 ...state,
-                search: action.searchTerm
+                searchTerm: action.searchTerm
             }
 
         default:

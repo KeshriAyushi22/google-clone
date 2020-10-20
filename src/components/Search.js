@@ -9,8 +9,9 @@ import { actionTypes } from '../services/reducer';
 
 
 export default function Search({ hideButton = false }) { //default value
-    const [input, setInput] = useState("");
-    const [{ }, dispatch] = useContextValue()
+
+    const [{ searchTerm }, dispatch] = useContextValue()
+    const [input, setInput] = useState(searchTerm);
     const history = useHistory();
 
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition
@@ -33,7 +34,6 @@ export default function Search({ hideButton = false }) { //default value
         })
 
     }
-
 
     const search = e => {
         e.preventDefault();
