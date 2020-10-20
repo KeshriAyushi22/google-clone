@@ -27,15 +27,19 @@ export default function Search({ hideButton = false }) { //default value
         //show on browser search bar and set the same data for search
         document.getElementById('searchbar').innerHTML = data
         setInput(data)
+        dispatch({
+            type: actionTypes.SET_SEARCH_TERM,
+            searchTerm: input
+        })
 
     }
 
 
-   const search = e => {
+    const search = e => {
         e.preventDefault();
         dispatch({
             type: actionTypes.SET_SEARCH_TERM,
-            term: input
+            searchTerm: input
         })
         history.push("/search");
     }

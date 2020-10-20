@@ -1,7 +1,7 @@
 
 export const initialState = {
     user: '',
-    searchTerm:''
+    searchTerm: ''
 }
 
 export const actionTypes = {
@@ -9,7 +9,7 @@ export const actionTypes = {
 }
 
 const reducer = (state, action) => {
-
+    console.log(action)
     switch (action.type) {
         case 'SET_USER':
             return {
